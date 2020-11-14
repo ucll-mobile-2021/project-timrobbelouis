@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Chef_Louiardie</string>
+    <string name="chef_louiardie">Chef Louiardie</string>
+    <string name="search_recipes">Search Recipes</string>
+    <string name="search_recipes_by_ingredients">Search Recipes by ingredients</string>
+    <string name="get_random_recipe">Get Random Recipe</string>
+</resources>
