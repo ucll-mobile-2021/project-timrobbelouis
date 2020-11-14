@@ -1,8 +1,10 @@
 package com.example.chef_louiardie
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import org.json.JSONObject
 import java.net.URL
 import kotlin.concurrent.timer
 
@@ -17,6 +19,16 @@ class MainActivity : AppCompatActivity() {
                  val result =
                     URL("https://api.spoonacular.com/recipes/complexSearch?apiKey=47d5a6ad23494cf696007384ca0524cd&query=pasta&excludeIngredients=tuna").readText()
                 println(result)
+                val resultJson = JSONObject(result)
+                val resultresultJson = resultJson.getJSONArray("results")
+//                val end = resultresultJson.length()-1
+//                for(x in 0..end){
+//                    println(JSONObject(resultresultJson.get(x).toString()).get("image"))
+//                }
+                val intent = Intent(this, ReceptenActivity::class.java).apply {
+                    putExtra("recepten", resultresultJson.toString())
+                }
+                startActivity(intent)
             }.start()
 
 
