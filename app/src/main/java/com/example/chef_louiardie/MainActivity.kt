@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import org.json.JSONObject
 import java.net.URL
 import kotlin.concurrent.timer
@@ -30,9 +31,15 @@ class MainActivity : AppCompatActivity() {
                 }
                 startActivity(intent)
             }.start()
-
-
         }
+
+        val searchRecipe = findViewById<TextView>(R.id.searchRecipe)
+
+        searchRecipe.setOnClickListener{
+            val intent = Intent(this, SearchRecipeActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 }

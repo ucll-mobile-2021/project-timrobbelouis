@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ReceptenActivity" />
+        <activity android:name=".SearchRecipeActivity" />
     </application>
 
 
