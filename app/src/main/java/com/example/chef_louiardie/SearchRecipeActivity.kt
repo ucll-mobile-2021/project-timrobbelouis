@@ -1,11 +1,13 @@
 package com.example.chef_louiardie
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import org.json.JSONArray
 import org.json.JSONObject
 import java.net.URL
@@ -26,6 +28,7 @@ class SearchRecipeActivity: AppCompatActivity()  {
                 val result = URL("https://api.spoonacular.com/recipes/autocomplete?apiKey=47d5a6ad23494cf696007384ca0524cd&number=10&query=${input.text}").readText()
                 val resultJSON = JSONArray(result)
                 val array = Array(resultJSON.length()){
+                    //titel uit JSON string halen
                     i -> JSONObject(resultJSON.get(i).toString()).get("title")
                 }
 
@@ -43,7 +46,14 @@ class SearchRecipeActivity: AppCompatActivity()  {
                         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayEmpti)
                         list.adapter = adapter
                     }
+                    list.setOnItemClickListener { parent, view, position, id ->
 
+                        val recipeId = JSONObject(resultJSON.get(position).toString()).get("id").toString()
+                        val intent = Intent(this, RecipeInformationActivity::class.java).apply {
+                            putExtra("id", recipeId)
+                        }
+                        startActivity(intent)
+                    }
                 }
             }.start()
 
@@ -54,3 +64,5 @@ class SearchRecipeActivity: AppCompatActivity()  {
 
 
 }
+
+
