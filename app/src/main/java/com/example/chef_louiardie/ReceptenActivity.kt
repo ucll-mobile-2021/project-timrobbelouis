@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONArray
 import org.json.JSONObject
-
+//voorbeeld code om request te sturen en values op de app te tonen
 class ReceptenActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
