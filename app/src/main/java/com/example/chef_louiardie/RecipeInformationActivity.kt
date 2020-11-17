@@ -36,6 +36,7 @@ class RecipeInformationActivity : AppCompatActivity() {
                 )
                 val url = JSONObject(result).getString("image")
                 Picasso.get().load(url).into(recipeInfoImage)
+
             }
         }.start()
 

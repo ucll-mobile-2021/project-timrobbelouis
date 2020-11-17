@@ -23,6 +23,8 @@
         <activity android:name=".ReceptenActivity" />
         <activity android:name=".RecipeInformationActivity" />
         <activity android:name=".SearchRecipeActivity" />
+        <activity android:name=".SearchIngredientRecipeActivity" />
+        <activity android:name=".SearchRandomRecipeActivity" />
     </application>
 
 
