@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
             Thread {
 
-                val result = URL("https://api.spoonacular.com/recipes/random?apiKey=47d5a6ad23494cf696007384ca0524cd&number=1").readText()
+                val result = URL("https://api.spoonacular.com/recipes/random?apiKey=f57ead542f804aa4bb76336783b870e0&number=1").readText()
 
                 runOnUiThread {
                     //Update UI
