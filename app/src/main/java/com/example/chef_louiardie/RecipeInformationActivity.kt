@@ -1,11 +1,13 @@
 package com.example.chef_louiardie
 
+import android.content.Intent
 import android.media.Image
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.Html.FROM_HTML_MODE_COMPACT
 import android.text.method.ScrollingMovementMethod
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -21,6 +23,18 @@ class RecipeInformationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipe_information)
+
+        val guideButton = findViewById<Button>(R.id.GuideButton)
+
+        guideButton.setOnClickListener{
+            val intent = Intent(this, GuideRecipe::class.java).apply {
+                putExtra("id",intent.getStringExtra("id"))
+            }
+            startActivity(intent)
+        }
+
+
+
         val titel = findViewById<TextView>(R.id.titel)
         val summary = findViewById<TextView>(R.id.summary)
         val recipeInfoImage = findViewById<ImageView>(R.id.recipeInfoImage)
