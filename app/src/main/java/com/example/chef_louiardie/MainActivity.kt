@@ -1,19 +1,27 @@
 package com.example.chef_louiardie
 
+import android.R.attr.path
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.*
-import org.json.JSONArray
+import android.os.Environment
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONObject
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.net.URL
-import kotlin.concurrent.timer
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_screen)
 
+        val properties = Properties()
+        properties.put("apikey","f57ead542f804aa4bb76336783b870e0")
+        System.setProperties(properties)
 
         // search by ingredient
         val searchIngredientRecipe = findViewById<TextView>(R.id.searchByIngredients)
@@ -37,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
             Thread {
 
-                val result = URL("https://api.spoonacular.com/recipes/random?apiKey=f57ead542f804aa4bb76336783b870e0&number=1").readText()
+                val result = URL("https://api.spoonacular.com/recipes/random?apiKey=" + System.getProperties().getProperty("apikey") +"&number=1").readText()
 
                 runOnUiThread {
                     //Update UI
