@@ -4,4 +4,5 @@
     <string name="search_recipes">Search Recipes</string>
     <string name="search_recipes_by_ingredients">Search Recipes by ingredients</string>
     <string name="get_random_recipe">Get Random Recipe</string>
+    <string name="editors_choice">Editors Choice</string>
 </resources>
