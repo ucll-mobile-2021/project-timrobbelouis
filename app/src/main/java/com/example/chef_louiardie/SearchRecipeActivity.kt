@@ -44,7 +44,6 @@ class SearchRecipeActivity: AppCompatActivity()  {
                         list.adapter = adapter
                     }
                     list.setOnItemClickListener { parent, view, position, id ->
-
                         val recipeId = JSONObject(resultJSON.get(position).toString()).get("id").toString()
                         val intent = Intent(this, RecipeInformationActivity::class.java).apply {
                             putExtra("id", recipeId)

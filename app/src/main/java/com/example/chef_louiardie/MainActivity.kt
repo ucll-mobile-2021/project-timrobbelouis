@@ -4,8 +4,11 @@ import android.R.attr.path
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
+import android.text.Html
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.squareup.picasso.Picasso
 import org.json.JSONObject
 import java.io.File
 import java.io.FileInputStream
@@ -67,6 +70,22 @@ class MainActivity : AppCompatActivity() {
             }.start()
 
         }
+        Thread {
+        val editorsChoiceRecipe1 = URL("https://api.spoonacular.com/recipes/535835/information?apiKey="+ apikey).readText()
+        val editorsChoiceRecipe2 = URL("https://api.spoonacular.com/recipes/558948/information?apiKey="+ apikey).readText()
+        val editorsChoiceImage1 = findViewById<ImageView>(R.id.EditorsChoiceImage1)
+        val editorsChoiceImage2 = findViewById<ImageView>(R.id.EditorsChoiceImage2)
+        val editorsTitle1 = findViewById<TextView>(R.id.EditorsChoiceTitle1)
+        val editorsChoiceTitle2 = findViewById<TextView>(R.id.EditorsChoiceTitle2)
+        runOnUiThread {
+            editorsTitle1.text = JSONObject(editorsChoiceRecipe1).getString("title")
+            editorsChoiceTitle2.text = JSONObject(editorsChoiceRecipe2).getString("title")
+            val url = JSONObject(editorsChoiceRecipe1).getString("image")
+            Picasso.get().load(url).into(editorsChoiceImage1)
+            val url2 = JSONObject(editorsChoiceRecipe2).getString("image")
+            Picasso.get().load(url2).into(editorsChoiceImage2)
+        }
+    }.start()
 
 
     }
