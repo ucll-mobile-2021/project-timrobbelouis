@@ -10,7 +10,7 @@ import java.net.URL
 
 
 class SearchRecipeActivity: AppCompatActivity()  {
-
+    val apikey =  System.getProperties().getProperty("apikey")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_recipe)
@@ -21,7 +21,7 @@ class SearchRecipeActivity: AppCompatActivity()  {
             //request met input van de user
             Thread {
                 val input = findViewById<EditText>(R.id.input_search)
-                val result = URL("https://api.spoonacular.com/recipes/autocomplete?apiKey=47d5a6ad23494cf696007384ca0524cd&number=10&query=${input.text}").readText()
+                val result = URL("https://api.spoonacular.com/recipes/autocomplete?apiKey="+ apikey +"&number=10&query=${input.text}").readText()
                 val resultJSON = JSONArray(result)
                 val array = Array(resultJSON.length()){
                     //titel uit JSON string halen

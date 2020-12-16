@@ -12,6 +12,7 @@ import org.json.JSONObject
 import java.net.URL
 
 class SearchIngredientRecipeActivity : AppCompatActivity() {
+    val apikey =  System.getProperties().getProperty("apikey")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_ingredient_recipe)
@@ -21,7 +22,7 @@ class SearchIngredientRecipeActivity : AppCompatActivity() {
         searchButton.setOnClickListener {
             Thread {
                 val input = findViewById<EditText>(R.id.input_search)
-                val result = URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey=47d5a6ad23494cf696007384ca0524cd&number=10&ingredients=${input.text}").readText()
+                val result = URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey="+ apikey +"&number=10&ingredients=${input.text}").readText()
                 val resultJSON = JSONArray(result)
                 val array = Array(resultJSON.length()){
                     //titel uit JSON string halen

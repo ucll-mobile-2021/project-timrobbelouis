@@ -14,7 +14,9 @@ import java.net.URL
 
 class GuideRecipeActivity : AppCompatActivity() {
     var i = 0
+    val apikey =  System.getProperties().getProperty("apikey")
     override fun onCreate(savedInstanceState: Bundle?) {
+
         val actionbar = supportActionBar
         //set actionbar title
         actionbar!!.title = "Guide"
@@ -47,7 +49,7 @@ class GuideRecipeActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     public fun updateStepUI(x: Int) {
         Thread {
-            val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/analyzedInstructions?apiKey=f57ead542f804aa4bb76336783b870e0").readText()
+            val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/analyzedInstructions?apiKey="+ apikey).readText()
 
             val resultJSONArray = JSONArray(result)
 

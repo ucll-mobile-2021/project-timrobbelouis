@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         val properties = Properties()
         properties.put("apikey","f57ead542f804aa4bb76336783b870e0")
         System.setProperties(properties)
-
+        val apikey =  System.getProperties().getProperty("apikey")
         // search by ingredient
         val searchIngredientRecipe = findViewById<TextView>(R.id.searchByIngredients)
 
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
             Thread {
 
-                val result = URL("https://api.spoonacular.com/recipes/random?apiKey=" + System.getProperties().getProperty("apikey") +"&number=1").readText()
+                val result = URL("https://api.spoonacular.com/recipes/random?apiKey=" + apikey +"&number=1").readText()
 
                 runOnUiThread {
                     //Update UI

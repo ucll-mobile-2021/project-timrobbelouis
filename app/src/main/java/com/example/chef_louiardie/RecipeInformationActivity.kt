@@ -20,6 +20,7 @@ class RecipeInformationActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
+        val apikey =  System.getProperties().getProperty("apikey")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipe_information)
 
@@ -40,7 +41,7 @@ class RecipeInformationActivity : AppCompatActivity() {
         summary.movementMethod = ScrollingMovementMethod()
 
         Thread {
-            val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/information?apiKey=f57ead542f804aa4bb76336783b870e0").readText()
+            val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/information?apiKey="+ apikey).readText()
             runOnUiThread {
                 titel.text = JSONObject(result).getString("title")
                 summary.text = Html.fromHtml(
