@@ -6,6 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -86,7 +96,7 @@
         android:layout_height="150dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:contentDescription="@string/image_of_recipe"
+        android:contentDescription="Image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2"
         tools:srcCompat="@tools:sample/avatars" />
@@ -97,7 +107,7 @@
         android:layout_height="150dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:contentDescription="@string/image_of_recipe"
+        android:contentDescription="Image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider2"
         tools:srcCompat="@tools:sample/avatars" />
@@ -107,7 +117,7 @@
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:layout_marginStart="24dp"
-        android:text="@string/textview"
+        android:text="TextView"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +128,7 @@
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:layout_marginEnd="24dp"
-        android:text="@string/textview"
+        android:text="Textview"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
