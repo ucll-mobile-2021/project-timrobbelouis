@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.home_screen)
 
         val properties = Properties()
-        properties.put("apikey","f57ead542f804aa4bb76336783b870e0")
+        properties.put("apikey","bde1396a9a2e46489f02fcd9bea1c8b4")
         System.setProperties(properties)
         val apikey =  System.getProperties().getProperty("apikey")
         // search by ingredient
@@ -71,21 +71,33 @@ class MainActivity : AppCompatActivity() {
 
         }
         Thread {
-        val editorsChoiceRecipe1 = URL("https://api.spoonacular.com/recipes/535835/information?apiKey="+ apikey).readText()
-        val editorsChoiceRecipe2 = URL("https://api.spoonacular.com/recipes/558948/information?apiKey="+ apikey).readText()
-        val editorsChoiceImage1 = findViewById<ImageView>(R.id.EditorsChoiceImage1)
-        val editorsChoiceImage2 = findViewById<ImageView>(R.id.EditorsChoiceImage2)
-        val editorsTitle1 = findViewById<TextView>(R.id.EditorsChoiceTitle1)
-        val editorsChoiceTitle2 = findViewById<TextView>(R.id.EditorsChoiceTitle2)
-        runOnUiThread {
-            editorsTitle1.text = JSONObject(editorsChoiceRecipe1).getString("title")
-            editorsChoiceTitle2.text = JSONObject(editorsChoiceRecipe2).getString("title")
-            val url = JSONObject(editorsChoiceRecipe1).getString("image")
-            Picasso.get().load(url).into(editorsChoiceImage1)
-            val url2 = JSONObject(editorsChoiceRecipe2).getString("image")
-            Picasso.get().load(url2).into(editorsChoiceImage2)
-        }
-    }.start()
+            val editorsChoiceRecipe1 = URL("https://api.spoonacular.com/recipes/535835/information?apiKey="+ apikey).readText()
+            val editorsChoiceRecipe2 = URL("https://api.spoonacular.com/recipes/361374/information?apiKey="+ apikey).readText()
+            val editorsChoiceRecipe3 = URL("https://api.spoonacular.com/recipes/640279/information?apiKey="+ apikey).readText()
+            val editorsChoiceRecipe4 = URL("https://api.spoonacular.com/recipes/636989/information?apiKey="+ apikey).readText()
+            val editorsChoiceImage1 = findViewById<ImageView>(R.id.EditorsChoiceImage1)
+            val editorsChoiceImage2 = findViewById<ImageView>(R.id.EditorsChoiceImage2)
+            val editorsChoiceImage3 = findViewById<ImageView>(R.id.EditorsChoiceImage3)
+            val editorsChoiceImage4 = findViewById<ImageView>(R.id.EditorsChoiceImage4)
+            val editorsTitle1 = findViewById<TextView>(R.id.EditorsChoiceTitle1)
+            val editorsChoiceTitle2 = findViewById<TextView>(R.id.EditorsChoiceTitle2)
+            val editorsChoiceTitle3 = findViewById<TextView>(R.id.EditorsChoiceTitle3)
+            val editorsChoiceTitle4 = findViewById<TextView>(R.id.EditorsChoiceTitle4)
+            runOnUiThread {
+                editorsTitle1.text = JSONObject(editorsChoiceRecipe1).getString("title")
+                editorsChoiceTitle2.text = JSONObject(editorsChoiceRecipe2).getString("title")
+                editorsChoiceTitle3.text = JSONObject(editorsChoiceRecipe3).getString("title")
+                editorsChoiceTitle4.text = JSONObject(editorsChoiceRecipe4).getString("title")
+                val url = JSONObject(editorsChoiceRecipe1).getString("image")
+                Picasso.get().load(url).into(editorsChoiceImage1)
+                val url2 = JSONObject(editorsChoiceRecipe2).getString("image")
+                Picasso.get().load(url2).into(editorsChoiceImage2)
+                val url3 = JSONObject(editorsChoiceRecipe3).getString("image")
+                Picasso.get().load(url3).into(editorsChoiceImage3)
+                val url4 = JSONObject(editorsChoiceRecipe4).getString("image")
+                Picasso.get().load(url4).into(editorsChoiceImage4)
+            }
+        }.start()
 
 
     }
