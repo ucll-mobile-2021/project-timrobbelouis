@@ -30,8 +30,9 @@ class GuideRecipeActivity : AppCompatActivity() {
     internal var MilliSeconds: Int = 0
 
     internal var flag:Boolean=false
-
+    internal var flag2:Boolean=false
     var startButton: Button? = null
+    var pauseButton: Button? = null
     var i = 0
     val apikey =  System.getProperties().getProperty("apikey")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +47,7 @@ class GuideRecipeActivity : AppCompatActivity() {
         setContentView(R.layout.guide_recept)
 
         startButton = findViewById(R.id.Play)
+
         bindViews()
 
         val nextstepbutton = findViewById<Button>(R.id.nextstep)
