@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.home_screen)
 
         val properties = Properties()
-        properties.put("apikey","bde1396a9a2e46489f02fcd9bea1c8b4")
+        properties.put("apikey","61c6cdff38df4291862c41a13f16e51e")
         System.setProperties(properties)
         val apikey =  System.getProperties().getProperty("apikey")
         // search by ingredient

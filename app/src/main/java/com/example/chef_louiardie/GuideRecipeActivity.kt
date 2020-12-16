@@ -32,10 +32,24 @@ class GuideRecipeActivity : AppCompatActivity() {
     internal var flag:Boolean=false
     internal var flag2:Boolean=false
     var startButton: Button? = null
-    var pauseButton: Button? = null
+    var nextstepbutton: Button? = null
     var i = 0
     val apikey =  System.getProperties().getProperty("apikey")
+    var stepsJA: JSONArray? = null
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/analyzedInstructions?apiKey="+ apikey).readText()
+        println(result)
+        val resultJSONArray = JSONArray(result)
+
+        val j = resultJSONArray[0]
+        val stepsJ = JSONObject(j.toString())
+
+        val steps = stepsJ["steps"]
+        stepsJA = JSONArray(steps.toString())
 
         val actionbar = supportActionBar
         //set actionbar title
@@ -50,9 +64,9 @@ class GuideRecipeActivity : AppCompatActivity() {
 
         bindViews()
 
-        val nextstepbutton = findViewById<Button>(R.id.nextstep)
+        nextstepbutton = findViewById<Button>(R.id.nextstep)
         updateStepUI(1)
-        nextstepbutton.setOnClickListener {
+        nextstepbutton?.setOnClickListener {
             updateStepUI(1)
         }
 
@@ -126,44 +140,44 @@ class GuideRecipeActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     public fun updateStepUI(x: Int) {
+
         Thread {
-            val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/analyzedInstructions?apiKey="+ apikey).readText()
-            println(result)
-            val resultJSONArray = JSONArray(result)
-
-            val j = resultJSONArray[0]
-            val stepsJ = JSONObject(j.toString())
-
-            val steps = stepsJ["steps"]
-            val stepsJA = JSONArray(steps.toString())
-            val step = stepsJA[i]
-            i += x
-            val stepJ = JSONObject(step.toString())
-            val number = stepJ["number"]
-            val explimination = stepJ["step"]
-            val ingredients = stepJ["ingredients"]
 
 
-            val numberstep = findViewById<TextView>(R.id.number)
-            val ingredientslist = findViewById<ListView>(R.id.ingred_list)
-            val explanation = findViewById<TextView>(R.id.explanation)
+            println(stepsJA?.length())
+            println(i)
+            if(stepsJA?.length()!! < i ){
+                nextstepbutton?.visibility = View.INVISIBLE
+            } else {
+
+                val step = stepsJA?.get(i)
+                i += x
+                val stepJ = JSONObject(step.toString())
+                val number = stepJ["number"]
+                val explimination = stepJ["step"]
+                val ingredients = stepJ["ingredients"]
 
 
-            runOnUiThread {
+                val numberstep = findViewById<TextView>(R.id.number)
+                val ingredientslist = findViewById<ListView>(R.id.ingred_list)
+                val explanation = findViewById<TextView>(R.id.explanation)
 
-                val ingredientsJA = JSONArray(ingredients.toString())
-                val array = Array(ingredientsJA.length()) {
-                    //name uit JSON string halen
-                    i ->
-                    JSONObject(ingredientsJA.get(i).toString()).get("name")
+
+                runOnUiThread {
+
+                    val ingredientsJA = JSONArray(ingredients.toString())
+                    val array = Array(ingredientsJA.length()) {
+                        //name uit JSON string halen
+                        i ->
+                        JSONObject(ingredientsJA.get(i).toString()).get("name")
+                    }
+                    val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, array)
+
+                    ingredientslist.adapter = adapter
+                    numberstep.text = "Step $number"
+                    explanation.text = explimination.toString()
+
                 }
-                val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, array)
-
-                ingredientslist.adapter = adapter
-                numberstep.text = "Step $number"
-                explanation.text = explimination.toString()
-
-
             }
         }.start()
     }
