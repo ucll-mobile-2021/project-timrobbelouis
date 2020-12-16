@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.home_screen)
 
         val properties = Properties()
-        properties.put("apikey","f57ead542f804aa4bb76336783b870e0")
+        properties.put("apikey","47d5a6ad23494cf696007384ca0524cd")
         System.setProperties(properties)
         val apikey =  System.getProperties().getProperty("apikey")
         // search by ingredient
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             Picasso.get().load(url2).into(editorsChoiceImage2)
             val url3 = JSONObject(editorsChoiceRecipe3).getString("image")
             Picasso.get().load(url3).into(editorsChoiceImage2)
-            val url4 = JSONObject(editorsChoiceRecipe3).getString("image")
+            val url4 = JSONObject(editorsChoiceRecipe4).getString("image")
             Picasso.get().load(url4).into(editorsChoiceImage2)
         }
     }.start()
