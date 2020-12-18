@@ -15,10 +15,7 @@ class FavoritesActivity : AppCompatActivity() {
         setContentView(R.layout.favorites)
         var listView = findViewById<ListView>(R.id.favoritesListView)
         val favoritesArrayList = FavoritesDb.favorites
-
         val adapter = RecipeAdapter(this, favoritesArrayList as ArrayList<String>)
         listView.adapter = adapter
-
-
     }
 }

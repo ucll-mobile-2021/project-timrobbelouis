@@ -17,6 +17,7 @@ import java.net.URL
 class RecipeAdapter(private val context: Context,
                     private val dataSource: ArrayList<String>) : BaseAdapter() {
 
+// Holy shit wat doet gij hier? Blijf er maar flink af dit is very important
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -37,29 +38,41 @@ class RecipeAdapter(private val context: Context,
         var result = URL("https://api.spoonacular.com/recipes/$id/information?apiKey=$apikey").readText()
         json = JSONObject(result)
         }.start()
-        Thread.sleep(2_000)
+        while(json.length() == 0){
+            Thread.sleep(100)
+        }
         // Get view for row item
         val rowView = inflater.inflate(R.layout.list_item_recipe, parent, false)
         // Get title element
         val titleTextView = rowView.findViewById(R.id.recipe_list_title) as TextView
-        // Get subtitle element
-        //val subtitleTextView = rowView.findViewById(R.id.recipe_list_subtitle) as TextView
-        // Get detail element
-        var NoD = rowView.findViewById(R.id.NoD) as ImageView
+
+        // Allergenen informatie
+        var NoDairy = rowView.findViewById(R.id.NoD) as ImageView
         var NoGlut = rowView.findViewById(R.id.NoGlut) as ImageView
         val Vegan = rowView.findViewById(R.id.Vegan) as ImageView
 
-        if(json.getBoolean("glutenFree")) NoD.visibility = View.VISIBLE
-        if(json.getBoolean("dairyFree")) NoGlut.visibility =View.VISIBLE
-        if(json.getBoolean("vegan")) Vegan.visibility = View.VISIBLE
-
         // Get thumbnail element
         val thumbnailImageView = rowView.findViewById(R.id.recipe_list_thumbnail) as ImageView
+
+        if(json.has("glutenFree")){
+                if(json.getBoolean("glutenFree")){
+                    NoDairy.visibility = View.VISIBLE
+                }
+        }
+        if(json.has("dairyFree")){
+            if(json.getBoolean("dairyFree")){
+                NoGlut.visibility =View.VISIBLE
+            }
+        }
+        if(json.has("vegan")){
+            if(json.getBoolean("vegan")){
+                Vegan.visibility = View.VISIBLE
+            }
+        }
         //Setting all the view items
         titleTextView.text = json.getString("title")
-       // subtitleTextView.text = "Lorem ipsum dolores est"
-        //detailTextView.text = "Hier komt een label wow 69420"
         Picasso.get().load(json.getString("image")).placeholder(R.mipmap.ic_launcher).into(thumbnailImageView)
+
         return rowView
     }
 }
