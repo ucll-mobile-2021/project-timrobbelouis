@@ -6,14 +6,13 @@ import android.os.Bundle
 import android.text.Html
 import android.text.Html.FROM_HTML_MODE_COMPACT
 import android.text.method.ScrollingMovementMethod
+import android.view.View
 import android.view.Window
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
+import org.json.JSONArray
 import org.json.JSONObject
 import java.net.URL
 
@@ -46,7 +45,6 @@ class RecipeInformationActivity : AppCompatActivity() {
 
         val ratingbar = findViewById<RatingBar>(R.id.ratingBar)
 
-        val summary = findViewById<TextView>(R.id.summary)
         val recipeInfoImage = findViewById<ImageView>(R.id.recipeInfoImage)
 //        summary.movementMethod = ScrollingMovementMethod()
 
@@ -54,20 +52,27 @@ class RecipeInformationActivity : AppCompatActivity() {
             val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/information?apiKey="+ apikey).readText()
             runOnUiThread {
                 titel.text = JSONObject(result).getString("title")
-                //titel.text = JSONObject(result).getString("readyInMinutes")
-                //titel.text = JSONObject(result).getString("glutenFree")
-                //titel.text = JSONObject(result).getString("dairyFree")
-                //titel.text = JSONObject(result).getString("vegan")
-                //titel.text = JSONObject(result).getString("vegetarian")
-                //titel.text = JSONObject(result).getString("pricePerServing")
+                findViewById<TextView>(R.id.time).text = JSONObject(result).getInt("readyInMinutes").toString() + "min"
+                if(JSONObject(result).getBoolean("glutenFree")) findViewById<ImageView>(R.id.NoGlut).visibility =View.VISIBLE
+                if(JSONObject(result).getBoolean("dairyFree")) findViewById<ImageView>(R.id.NoD).visibility =View.VISIBLE
+                if(JSONObject(result).getBoolean("vegan")) findViewById<ImageView>(R.id.Vegan).visibility =View.VISIBLE
+
+                val ingredientsJA = JSONArray(JSONObject(result).getString("extendedIngredients"))
                 var score = JSONObject(result).getInt("spoonacularScore").toFloat()
                 score /= 20
                 ratingbar.rating = score.toFloat()
 
-                summary.text = Html.fromHtml(
-                    JSONObject(result).getString("summary"),
-                    FROM_HTML_MODE_COMPACT
-                )
+                val ingredientslist = findViewById<ListView>(R.id.Ingridients)
+                val array = Array(ingredientsJA.length()) {
+                    //original uit JSON string halen
+                    i ->
+                    JSONObject(ingredientsJA.get(i).toString()).getString("original")
+                }
+                val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, array)
+
+                ingredientslist.adapter = adapter
+
+
                 val url = JSONObject(result).getString("image")
                 Picasso.get().load(url).into(recipeInfoImage)
 
