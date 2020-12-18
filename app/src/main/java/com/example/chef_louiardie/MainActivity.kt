@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
+import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 import java.io.FileInputStream
@@ -23,20 +24,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.home_screen)
 
         val properties = Properties()
-        properties.put("apikey","61c6cdff38df4291862c41a13f16e51e")
+        properties.put("apikey", "61c6cdff38df4291862c41a13f16e51e")
         System.setProperties(properties)
-        val apikey =  System.getProperties().getProperty("apikey")
+        val apikey = System.getProperties().getProperty("apikey")
         // search by ingredient
         val searchIngredientRecipe = findViewById<TextView>(R.id.searchByIngredients)
 
-        searchIngredientRecipe.setOnClickListener{
+        searchIngredientRecipe.setOnClickListener {
             val intent = Intent(this, SearchIngredientRecipeActivity::class.java)
             startActivity(intent)
         }
         // search recipe
         val searchRecipe = findViewById<TextView>(R.id.searchRecipe)
 
-        searchRecipe.setOnClickListener{
+        searchRecipe.setOnClickListener {
             val intent = Intent(this, SearchRecipeActivity::class.java)
             startActivity(intent)
         }
@@ -44,45 +45,45 @@ class MainActivity : AppCompatActivity() {
         // search by random
         val searchRandomRecipe = findViewById<TextView>(R.id.getRandomRecipe)
 
-        searchRandomRecipe.setOnClickListener{
+        searchRandomRecipe.setOnClickListener {
 
             Thread {
 
-                val result = URL("https://api.spoonacular.com/recipes/random?apiKey=" + apikey +"&number=1").readText()
+                val result = URL("https://api.spoonacular.com/recipes/random?apiKey=" + apikey + "&number=1").readText()
 
                 runOnUiThread {
                     //Update UI
-
-
                     val resultJson = JSONObject(result)
                     val resultresultJson = resultJson.getJSONArray("recipes")
                     println(resultJson)
                     println(resultresultJson)
                     val id = resultresultJson.getJSONObject(0).get("id").toString()
-                        println(id)
-                     val intent = Intent(this, RecipeInformationActivity::class.java).apply {
-                            putExtra("id", id)
-                       }
-                      startActivity(intent)
+                    println(id)
+                    val intent = Intent(this, RecipeInformationActivity::class.java).apply {
+                        putExtra("id", id)
+                    }
+                    startActivity(intent)
 
 
                 }
             }.start()
 
         }
+        val editorsChoiceImage1 = findViewById<ImageView>(R.id.EditorsChoiceImage1)
+        val editorsChoiceImage2 = findViewById<ImageView>(R.id.EditorsChoiceImage2)
+        val editorsChoiceImage3 = findViewById<ImageView>(R.id.EditorsChoiceImage3)
+        val editorsChoiceImage4 = findViewById<ImageView>(R.id.EditorsChoiceImage4)
+        val editorsTitle1 = findViewById<TextView>(R.id.EditorsChoiceTitle1)
+        val editorsChoiceTitle2 = findViewById<TextView>(R.id.EditorsChoiceTitle2)
+        val editorsChoiceTitle3 = findViewById<TextView>(R.id.EditorsChoiceTitle3)
+        val editorsChoiceTitle4 = findViewById<TextView>(R.id.EditorsChoiceTitle4)
+
+
         Thread {
-            val editorsChoiceRecipe1 = URL("https://api.spoonacular.com/recipes/535835/information?apiKey="+ apikey).readText()
-            val editorsChoiceRecipe2 = URL("https://api.spoonacular.com/recipes/361374/information?apiKey="+ apikey).readText()
-            val editorsChoiceRecipe3 = URL("https://api.spoonacular.com/recipes/640279/information?apiKey="+ apikey).readText()
-            val editorsChoiceRecipe4 = URL("https://api.spoonacular.com/recipes/636989/information?apiKey="+ apikey).readText()
-            val editorsChoiceImage1 = findViewById<ImageView>(R.id.EditorsChoiceImage1)
-            val editorsChoiceImage2 = findViewById<ImageView>(R.id.EditorsChoiceImage2)
-            val editorsChoiceImage3 = findViewById<ImageView>(R.id.EditorsChoiceImage3)
-            val editorsChoiceImage4 = findViewById<ImageView>(R.id.EditorsChoiceImage4)
-            val editorsTitle1 = findViewById<TextView>(R.id.EditorsChoiceTitle1)
-            val editorsChoiceTitle2 = findViewById<TextView>(R.id.EditorsChoiceTitle2)
-            val editorsChoiceTitle3 = findViewById<TextView>(R.id.EditorsChoiceTitle3)
-            val editorsChoiceTitle4 = findViewById<TextView>(R.id.EditorsChoiceTitle4)
+            val editorsChoiceRecipe1 = URL("https://api.spoonacular.com/recipes/535835/information?apiKey=" + apikey).readText()
+            val editorsChoiceRecipe2 = URL("https://api.spoonacular.com/recipes/361374/information?apiKey=" + apikey).readText()
+            val editorsChoiceRecipe3 = URL("https://api.spoonacular.com/recipes/640279/information?apiKey=" + apikey).readText()
+            val editorsChoiceRecipe4 = URL("https://api.spoonacular.com/recipes/636989/information?apiKey=" + apikey).readText()
             runOnUiThread {
                 editorsTitle1.text = JSONObject(editorsChoiceRecipe1).getString("title")
                 editorsChoiceTitle2.text = JSONObject(editorsChoiceRecipe2).getString("title")
@@ -96,9 +97,67 @@ class MainActivity : AppCompatActivity() {
                 Picasso.get().load(url3).into(editorsChoiceImage3)
                 val url4 = JSONObject(editorsChoiceRecipe4).getString("image")
                 Picasso.get().load(url4).into(editorsChoiceImage4)
-            }
-        }.start()
 
+                editorsChoiceImage1.setOnClickListener {
+                    val recipeId = JSONObject(editorsChoiceRecipe1).getString("id")
+                    val intent = Intent(this, RecipeInformationActivity::class.java).apply {
+                        putExtra("id", recipeId)
+                    }
+                    startActivity(intent)
+                }
+                editorsChoiceImage2.setOnClickListener {
+                    val recipeId = JSONObject(editorsChoiceRecipe2).getString("id")
+                    val intent = Intent(this, RecipeInformationActivity::class.java).apply {
+                        putExtra("id", recipeId)
+                    }
+                    startActivity(intent)
+                }
+                editorsChoiceImage3.setOnClickListener {
+                    val recipeId = JSONObject(editorsChoiceRecipe3).getString("id")
+                    val intent = Intent(this, RecipeInformationActivity::class.java).apply {
+                        putExtra("id", recipeId)
+                    }
+                    startActivity(intent)
+                }
+                editorsChoiceImage4.setOnClickListener {
+                    val recipeId = JSONObject(editorsChoiceRecipe4).getString("id")
+                    val intent = Intent(this, RecipeInformationActivity::class.java).apply {
+                        putExtra("id", recipeId)
+                    }
+                    startActivity(intent)
+                }
+                editorsTitle1.setOnClickListener {
+                    val recipeId = JSONObject(editorsChoiceRecipe1).getString("id")
+                    val intent = Intent(this, RecipeInformationActivity::class.java).apply {
+                        putExtra("id", recipeId)
+                    }
+                    startActivity(intent)
+                }
+                editorsChoiceTitle2.setOnClickListener {
+                    val recipeId = JSONObject(editorsChoiceRecipe2).getString("id")
+                    val intent = Intent(this, RecipeInformationActivity::class.java).apply {
+                        putExtra("id", recipeId)
+                    }
+                    startActivity(intent)
+                }
+                editorsChoiceTitle3.setOnClickListener {
+                    val recipeId = JSONObject(editorsChoiceRecipe3).getString("id")
+                    val intent = Intent(this, RecipeInformationActivity::class.java).apply {
+                        putExtra("id", recipeId)
+                    }
+                    startActivity(intent)
+                }
+                editorsChoiceTitle4.setOnClickListener {
+                    val recipeId = JSONObject(editorsChoiceRecipe4).getString("id")
+                    val intent = Intent(this, RecipeInformationActivity::class.java).apply {
+                        putExtra("id", recipeId)
+                    }
+                    startActivity(intent)
+                }
+
+            }
+
+        }.start()
 
     }
 }

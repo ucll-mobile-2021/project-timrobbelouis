@@ -24,7 +24,6 @@ class GuideRecipeActivity : AppCompatActivity() {
     internal var TimeBuff: Long = 0
     internal var UpdateTime = 0L
 
-
     internal var Seconds: Int = 0
     internal var Minutes: Int = 0
     internal var MilliSeconds: Int = 0
@@ -33,43 +32,59 @@ class GuideRecipeActivity : AppCompatActivity() {
     internal var flag2:Boolean=false
     var startButton: Button? = null
     var nextstepbutton: Button? = null
-    var i = 0
+    var previousStepButton: Button? = null
+    var i = -1
     val apikey =  System.getProperties().getProperty("apikey")
     var stepsJA: JSONArray? = null
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/analyzedInstructions?apiKey="+ apikey).readText()
-        println(result)
-        val resultJSONArray = JSONArray(result)
-
-        val j = resultJSONArray[0]
-        val stepsJ = JSONObject(j.toString())
-
-        val steps = stepsJ["steps"]
-        stepsJA = JSONArray(steps.toString())
-
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.guide_recept)
         val actionbar = supportActionBar
         //set actionbar title
         actionbar!!.title = "Guide"
         //set back button
         actionbar.setDisplayHomeAsUpEnabled(true)
+        Thread {
+            val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/analyzedInstructions?apiKey=" + apikey).readText()
+            println(result)
+            val resultJSONArray = JSONArray(result)
 
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.guide_recept)
+            val j = resultJSONArray[0]
+            val stepsJ = JSONObject(j.toString())
 
-        startButton = findViewById(R.id.Play)
+            val steps = stepsJ["steps"]
+            stepsJA = JSONArray(steps.toString())
 
-        bindViews()
 
-        nextstepbutton = findViewById<Button>(R.id.nextstep)
-        updateStepUI(1)
-        nextstepbutton?.setOnClickListener {
-            updateStepUI(1)
-        }
+            runOnUiThread {
 
+                startButton = findViewById(R.id.Play)
+                previousStepButton = findViewById<Button>(R.id.previousStep)
+                bindViews()
+                nextstepbutton = findViewById<Button>(R.id.nextstep)
+                updateStepUI(1)
+                nextstepbutton?.setOnClickListener {
+                    println(i)
+                    updateStepUI(1)
+                    previousStepButton?.visibility = View.VISIBLE
+
+                }
+
+                previousStepButton?.setOnClickListener {
+                    if(nextstepbutton?.visibility == View.INVISIBLE){
+                        nextstepbutton?.visibility = View.VISIBLE
+                    }
+                    println(i)
+                    if(i <= 1){
+                        previousStepButton?.visibility = View.INVISIBLE
+                    }
+                    updateStepUI(-1)
+                }
+            }
+        }.start()
     }
 
     var runnable: Runnable = object : Runnable {
@@ -108,13 +123,9 @@ class GuideRecipeActivity : AppCompatActivity() {
     }
 
     private fun bindViews() {
-
-
         minute = findViewById(R.id.minute)
         seconds = findViewById(R.id.seconds)
         milli_seconds = findViewById(R.id.milli_second)
-
-
         startButton?.setOnClickListener {
             if (flag){
                 startButton?.text = "START TIMER"
@@ -126,7 +137,6 @@ class GuideRecipeActivity : AppCompatActivity() {
                 handler?.postDelayed(runnable, 0)
                 flag=true
             }
-
         }
 
         handler = Handler()
@@ -141,44 +151,36 @@ class GuideRecipeActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     public fun updateStepUI(x: Int) {
 
-        Thread {
-
-
             println(stepsJA?.length())
             println(i)
-            if(stepsJA?.length()!! < i ){
+            if(stepsJA?.length()!!-1 == i+x){
+                println("Iets kakapipi")
                 nextstepbutton?.visibility = View.INVISIBLE
-            } else {
-
-                val step = stepsJA?.get(i)
-                i += x
-                val stepJ = JSONObject(step.toString())
-                val number = stepJ["number"]
-                val explimination = stepJ["step"]
-                val ingredients = stepJ["ingredients"]
-
-
-                val numberstep = findViewById<TextView>(R.id.number)
-                val ingredientslist = findViewById<ListView>(R.id.ingred_list)
-                val explanation = findViewById<TextView>(R.id.explanation)
-
-
-                runOnUiThread {
-
-                    val ingredientsJA = JSONArray(ingredients.toString())
-                    val array = Array(ingredientsJA.length()) {
-                        //name uit JSON string halen
-                        i ->
-                        JSONObject(ingredientsJA.get(i).toString()).get("name")
-                    }
-                    val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, array)
-
-                    ingredientslist.adapter = adapter
-                    numberstep.text = "Step $number"
-                    explanation.text = explimination.toString()
-
-                }
             }
-        }.start()
+            i += x
+            val step = stepsJA?.get(i)
+            val stepJ = JSONObject(step.toString())
+            val number = stepJ["number"]
+            val explimination = stepJ["step"]
+            val ingredients = stepJ["ingredients"]
+
+            val numberstep = findViewById<TextView>(R.id.number)
+            val ingredientslist = findViewById<ListView>(R.id.ingred_list)
+            val explanation = findViewById<TextView>(R.id.explanation)
+
+            val ingredientsJA = JSONArray(ingredients.toString())
+                val array = Array(ingredientsJA.length()) {
+                    //name uit JSON string halen
+                    i ->
+                    JSONObject(ingredientsJA.get(i).toString()).get("name")
+                }
+            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, array)
+
+            ingredientslist.adapter = adapter
+            numberstep.text = "Step $number"
+            explanation.text = explimination.toString()
+
+
+
     }
 }
