@@ -15,6 +15,12 @@ class SearchRecipeActivity: AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_recipe)
 
+        val actionbar = supportActionBar
+        //set actionbar title
+        actionbar!!.title = "Search Recipe"
+        //set back button
+        actionbar.setDisplayHomeAsUpEnabled(true)
+
         val searchButton = findViewById<Button>(R.id.search_spec_recipe)
         searchButton.setOnClickListener {
 
@@ -56,7 +62,10 @@ class SearchRecipeActivity: AppCompatActivity()  {
         }
 
     }
-
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 
 
 }

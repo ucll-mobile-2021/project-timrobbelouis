@@ -9,6 +9,7 @@ import android.text.method.ScrollingMovementMethod
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -42,6 +43,9 @@ class RecipeInformationActivity : AppCompatActivity() {
 
 
         val titel = findViewById<TextView>(R.id.titel)
+
+        val ratingbar = findViewById<RatingBar>(R.id.ratingBar)
+
         val summary = findViewById<TextView>(R.id.summary)
         val recipeInfoImage = findViewById<ImageView>(R.id.recipeInfoImage)
 //        summary.movementMethod = ScrollingMovementMethod()
@@ -50,6 +54,16 @@ class RecipeInformationActivity : AppCompatActivity() {
             val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/information?apiKey="+ apikey).readText()
             runOnUiThread {
                 titel.text = JSONObject(result).getString("title")
+                //titel.text = JSONObject(result).getString("readyInMinutes")
+                //titel.text = JSONObject(result).getString("glutenFree")
+                //titel.text = JSONObject(result).getString("dairyFree")
+                //titel.text = JSONObject(result).getString("vegan")
+                //titel.text = JSONObject(result).getString("vegetarian")
+                //titel.text = JSONObject(result).getString("pricePerServing")
+                var score = JSONObject(result).getInt("spoonacularScore").toFloat()
+                score /= 20
+                ratingbar.rating = score.toFloat()
+
                 summary.text = Html.fromHtml(
                     JSONObject(result).getString("summary"),
                     FROM_HTML_MODE_COMPACT

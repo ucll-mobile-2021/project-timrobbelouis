@@ -16,6 +16,12 @@ class ReceptenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recepten)
 
+        val actionbar = supportActionBar
+        //set actionbar title
+        actionbar!!.title = "Recipes"
+        //set back button
+        actionbar.setDisplayHomeAsUpEnabled(true)
+
         var recept = intent.getStringExtra("recepten")
 
         val listView = findViewById<ListView>(R.id.listView)
@@ -30,5 +36,10 @@ class ReceptenActivity : AppCompatActivity() {
             val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, array)
             listView.adapter = adapter
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
