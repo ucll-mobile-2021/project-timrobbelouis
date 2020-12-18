@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Html
 import android.text.Html.FROM_HTML_MODE_COMPACT
 import android.text.method.ScrollingMovementMethod
+import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,6 +24,11 @@ class RecipeInformationActivity : AppCompatActivity() {
         val apikey =  System.getProperties().getProperty("apikey")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipe_information)
+        val actionbar = supportActionBar
+        //set actionbar title
+        actionbar!!.title = "Recipe Information"
+        //set back button
+        actionbar.setDisplayHomeAsUpEnabled(true)
 
         val guideButton = findViewById<Button>(R.id.GuideButton)
 
@@ -38,7 +44,7 @@ class RecipeInformationActivity : AppCompatActivity() {
         val titel = findViewById<TextView>(R.id.titel)
         val summary = findViewById<TextView>(R.id.summary)
         val recipeInfoImage = findViewById<ImageView>(R.id.recipeInfoImage)
-        summary.movementMethod = ScrollingMovementMethod()
+//        summary.movementMethod = ScrollingMovementMethod()
 
         Thread {
             val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/information?apiKey="+ apikey).readText()
@@ -54,6 +60,10 @@ class RecipeInformationActivity : AppCompatActivity() {
             }
         }.start()
 
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
 }

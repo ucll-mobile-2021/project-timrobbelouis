@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_screen)
-
+        val actionbar = supportActionBar
+        actionbar?.hide()
         val properties = Properties()
         properties.put("apikey", "61c6cdff38df4291862c41a13f16e51e")
         System.setProperties(properties)
