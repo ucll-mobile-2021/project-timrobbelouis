@@ -38,9 +38,6 @@ class RecipeInformationActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
-
-
-
         val titel = findViewById<TextView>(R.id.titel)
 
         val ratingbar = findViewById<RatingBar>(R.id.ratingBar)
@@ -52,7 +49,7 @@ class RecipeInformationActivity : AppCompatActivity() {
             val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/information?apiKey="+ apikey).readText()
             runOnUiThread {
                 titel.text = JSONObject(result).getString("title")
-                findViewById<TextView>(R.id.time).text = JSONObject(result).getInt("readyInMinutes").toString() + "min"
+                findViewById<TextView>(R.id.time).text = JSONObject(result).getInt("readyInMinutes").toString() + " min"
                 if(JSONObject(result).getBoolean("glutenFree")) findViewById<ImageView>(R.id.NoGlut).visibility =View.VISIBLE
                 if(JSONObject(result).getBoolean("dairyFree")) findViewById<ImageView>(R.id.NoD).visibility =View.VISIBLE
                 if(JSONObject(result).getBoolean("vegan")) findViewById<ImageView>(R.id.Vegan).visibility =View.VISIBLE
