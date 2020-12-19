@@ -7,6 +7,7 @@ import android.icu.number.NumberRangeFormatter.with
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
@@ -69,6 +70,7 @@ class RecipeAdapter(private val context: Context,
                 Vegan.visibility = View.VISIBLE
             }
         }
+
         //Setting all the view items
         titleTextView.text = json.getString("title")
         Picasso.get().load(json.getString("image")).placeholder(R.mipmap.ic_launcher).into(thumbnailImageView)

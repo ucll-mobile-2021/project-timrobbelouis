@@ -2,8 +2,12 @@ package com.example.chef_louiardie
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.squareup.picasso.Picasso
+import org.json.JSONObject
+import java.net.URL
 import java.util.*
 
 
@@ -14,14 +18,8 @@ class MainActivity : AppCompatActivity() {
         val actionbar = supportActionBar
         actionbar?.hide()
         val properties = Properties()
-        properties.put("apikey", "eff6332366ac4eb79138ef456683a0e8")
-        val db = FavoritesDb
-        db.addFavorite("535835")
-        db.addFavorite("639401")
+        properties.put("apikey", "bde1396a9a2e46489f02fcd9bea1c8b4")
         System.setProperties(properties)
-
-
-
         val apikey = System.getProperties().getProperty("apikey")
         // search by ingredient
         val searchIngredientRecipe = findViewById<TextView>(R.id.searchByIngredients)
@@ -44,23 +42,6 @@ class MainActivity : AppCompatActivity() {
         searchRandomRecipe.setOnClickListener {
             val intent = Intent(this, ShakerActivity::class.java)
             startActivity(intent)
-//            Thread {
-//
-//                val result = URL("https://api.spoonacular.com/recipes/random?apiKey=" + apikey + "&number=1").readText()
-//
-//                runOnUiThread {
-//                    //Update UI
-//                    val resultJson = JSONObject(result)
-//                    val resultresultJson = resultJson.getJSONArray("recipes")
-//                    val id = resultresultJson.getJSONObject(0).get("id").toString()
-//                    println(id)
-//                    val intent = Intent(this, RecipeInformationActivity::class.java).apply {
-//                        putExtra("id", id)
-//                    }
-//                    startActivity(intent)
-//                }
-//            }.start()
-
         }
         val favoriteRecipebutton = findViewById<TextView>(R.id.favoriteRecipiesButton)
         favoriteRecipebutton.setOnClickListener{

@@ -37,8 +37,6 @@ class ShakerActivity : AppCompatActivity() {
         fun goToRandomActivity() {
             j++
             if (j == 1) {
-
-
                 Thread {
 
                     val result = URL("https://api.spoonacular.com/recipes/random?apiKey=" + apikey + "&number=1").readText()
@@ -81,6 +79,7 @@ class ShakerActivity : AppCompatActivity() {
             override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
         }
         override fun onResume() {
+            j = 0
             sensorManager?.registerListener(sensorListener, sensorManager!!.getDefaultSensor(
                     Sensor .TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL
             )
