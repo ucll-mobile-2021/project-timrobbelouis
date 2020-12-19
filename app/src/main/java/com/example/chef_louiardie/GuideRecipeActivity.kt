@@ -49,7 +49,7 @@ class GuideRecipeActivity : AppCompatActivity() {
         actionbar.setDisplayHomeAsUpEnabled(true)
         Thread {
             val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/analyzedInstructions?apiKey=" + apikey).readText()
-            println(result)
+
             val resultJSONArray = JSONArray(result)
 
             val j = resultJSONArray[0]

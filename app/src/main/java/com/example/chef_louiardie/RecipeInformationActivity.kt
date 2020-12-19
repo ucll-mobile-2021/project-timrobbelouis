@@ -33,12 +33,7 @@ class RecipeInformationActivity : AppCompatActivity() {
 
         val guideButton = findViewById<Button>(R.id.GuideButton)
 
-        guideButton.setOnClickListener{
-            val intent = Intent(this, GuideRecipeActivity::class.java).apply {
-                putExtra("id",intent.getStringExtra("id"))
-            }
-            startActivity(intent)
-        }
+
         val id = intent.getStringExtra("id")
         val context = this
         var db = DataBaseHandler(context)
@@ -71,7 +66,20 @@ class RecipeInformationActivity : AppCompatActivity() {
 
         Thread {
             val result = URL("https://api.spoonacular.com/recipes/" + intent.getStringExtra("id") + "/information?apiKey="+ apikey).readText()
+            val steps = JSONObject(result).getJSONArray("analyzedInstructions")
+
+            guideButton.setOnClickListener{
+                val intent = Intent(this, GuideRecipeActivity::class.java).apply {
+                    putExtra("id", intent.getStringExtra("id"))
+                }
+                startActivity(intent)
+            }
+
+
             runOnUiThread {
+                if( !steps.isNull(0)) {
+                    guideButton.visibility = View.VISIBLE
+                }
                 titel.text = JSONObject(result).getString("title")
                 findViewById<TextView>(R.id.time).text = JSONObject(result).getInt("readyInMinutes").toString() + " min"
                 if(JSONObject(result).getBoolean("glutenFree")) findViewById<ImageView>(R.id.NoGlut).visibility =View.VISIBLE

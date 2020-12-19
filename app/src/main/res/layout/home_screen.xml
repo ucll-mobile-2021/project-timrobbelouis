@@ -39,26 +39,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <TextView
-                android:id="@+id/searchRecipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:text="@string/search_recipes"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-            <TextView
                 android:id="@+id/searchByIngredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/search_recipes_by_ingredients"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchRecipe" />
+                app:layout_constraintTop_toBottomOf="@+id/searchRecipeInput" />
 
             <TextView
                 android:id="@+id/getRandomRecipe"
@@ -198,6 +187,26 @@
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/getRandomRecipe" />
+
+            <AutoCompleteTextView
+                android:id="@+id/searchRecipeInput"
+                android:layout_width="208dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="40dp"
+                android:hint="Search Recipe"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <ImageButton
+                android:id="@+id/searchRecipe"
+                android:layout_width="47dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="40dp"
+                android:background="@android:drawable/ic_menu_search"
+                app:layout_constraintStart_toEndOf="@+id/searchRecipeInput"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
