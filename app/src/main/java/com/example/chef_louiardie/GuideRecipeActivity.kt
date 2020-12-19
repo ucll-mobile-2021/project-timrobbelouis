@@ -2,6 +2,7 @@ package com.example.chef_louiardie
 
 import android.annotation.SuppressLint
 import android.app.ActionBar
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -67,7 +68,11 @@ class GuideRecipeActivity : AppCompatActivity() {
                 nextstepbutton = findViewById<Button>(R.id.nextstep)
                 updateStepUI(1)
                 nextstepbutton?.setOnClickListener {
-                    println(i)
+                    if(stepsJA?.length()!!-1 == i+1){
+                        nextstepbutton?.text = "Finish"
+                        val intent = Intent(this, FinalStep::class.java)
+                        startActivity(intent)
+                    }
                     updateStepUI(1)
                     previousStepButton?.visibility = View.VISIBLE
 
@@ -77,7 +82,6 @@ class GuideRecipeActivity : AppCompatActivity() {
                     if(nextstepbutton?.visibility == View.INVISIBLE){
                         nextstepbutton?.visibility = View.VISIBLE
                     }
-                    println(i)
                     if(i <= 1){
                         previousStepButton?.visibility = View.INVISIBLE
                     }
@@ -154,8 +158,8 @@ class GuideRecipeActivity : AppCompatActivity() {
             println(stepsJA?.length())
             println(i)
             if(stepsJA?.length()!!-1 == i+x){
-                println("Iets kakapipi")
-                nextstepbutton?.visibility = View.INVISIBLE
+//                nextstepbutton?.visibility = View.INVISIBLE
+                nextstepbutton?.text = "Finish"
             }
             i += x
             val step = stepsJA?.get(i)
