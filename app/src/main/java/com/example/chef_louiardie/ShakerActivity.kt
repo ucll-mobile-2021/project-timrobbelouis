@@ -1,6 +1,6 @@
 package com.example.chef_louiardie
 
-import androidx.appcompat.app.AppCompatActivity
+
 import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
@@ -8,13 +8,14 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.os.Vibrator
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONObject
 import java.net.URL
-
-
 import java.util.*
 import kotlin.math.sqrt
+
 class ShakerActivity : AppCompatActivity() {
         private var sensorManager: SensorManager? = null
         private var acceleration = 0f
@@ -32,10 +33,17 @@ class ShakerActivity : AppCompatActivity() {
             acceleration = 10f
             currentAcceleration = SensorManager.GRAVITY_EARTH
             lastAcceleration = SensorManager.GRAVITY_EARTH
+            val actionbar = supportActionBar
+            //set actionbar title
+            actionbar!!.title = "Recipe Information"
+            //set back button
+            actionbar.setDisplayHomeAsUpEnabled(true)
 
         }
         fun goToRandomActivity() {
             j++
+            val v = getSystemService(VIBRATOR_SERVICE) as Vibrator
+            v.vibrate(400);
             if (j == 1) {
                 Thread {
 
@@ -81,7 +89,7 @@ class ShakerActivity : AppCompatActivity() {
         override fun onResume() {
             j = 0
             sensorManager?.registerListener(sensorListener, sensorManager!!.getDefaultSensor(
-                    Sensor .TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL
+                    Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL
             )
             super.onResume()
         }
@@ -89,4 +97,8 @@ class ShakerActivity : AppCompatActivity() {
             sensorManager!!.unregisterListener(sensorListener)
             super.onPause()
         }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
     }
