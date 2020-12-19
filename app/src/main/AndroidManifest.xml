@@ -28,7 +28,13 @@
         <activity android:name=".SearchRecipeActivity" />
         <activity android:name=".SearchIngredientRecipeActivity" />
         <activity android:name=".FavoritesActivity" />
-
+        <activity android:name=".ShakerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RandomActivity" />
     </application>
 
 
