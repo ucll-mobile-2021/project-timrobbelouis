@@ -32,8 +32,8 @@
 
             <ImageView
                 android:id="@+id/recipeInfoImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="128dp"
+                android:layout_height="129dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
@@ -46,10 +46,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="94dp"
                 android:text="Guide"
                 app:layout_constraintStart_toEndOf="@+id/recipeInfoImage"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/favorite_empty" />
 
             <RatingBar
                 android:id="@+id/ratingBar"

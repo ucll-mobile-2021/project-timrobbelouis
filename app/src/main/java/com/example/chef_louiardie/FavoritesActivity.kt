@@ -1,27 +1,57 @@
 package com.example.chef_louiardie
 
-import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.*
+import android.widget.Button
+import android.widget.ListView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.ActionMenuItem
-import androidx.core.graphics.drawable.toDrawable
-import androidx.core.view.get
-import org.json.JSONObject
-import java.util.*
-import kotlin.collections.ArrayList
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 
 class FavoritesActivity : AppCompatActivity() {
+    val db = DataBaseHandler(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         val apikey = System.getProperties().getProperty("apikey")
         super.onCreate(savedInstanceState)
+        val actionbar = supportActionBar
+        actionbar?.hide()
         setContentView(R.layout.favorites_page)
+        doit()
+        val deletbutton = findViewById<FloatingActionButton>(R.id.delet_all)
+        deletbutton.setOnClickListener {
+
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Are you sure you want to delete all favorites?")
+                .setCancelable(false)
+
+                .setNegativeButton("No") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+                }
+                .setPositiveButton("Yes") { dialog, id ->
+                    // Delete selected note from database
+                    db.deleteData()
+                    doit()
+                }
+            val alert = builder.create()
+            alert.show()
+
+        }
+    }
+
+    override fun onResume() {
+        println("onresmi")
+        doit()
+        super.onResume()
+    }
+
+    fun doit(){
+        println("dote")
         val listView = findViewById<ListView>(R.id.favoritesListView)
-        val context = this
-        val db = DataBaseHandler(context)
+        listView.adapter = null
+
         val favoritesArrayList = db.readData()
         if(favoritesArrayList.size != 0) {
             val adapter = RecipeAdapter(this, favoritesArrayList as ArrayList<String>)
@@ -34,10 +64,6 @@ class FavoritesActivity : AppCompatActivity() {
                 }
                 startActivity(intent)
             }
-        }
-        val deletbutton = findViewById<Button>(R.id.delet_all)
-        deletbutton.setOnClickListener {
-            db.deleteData()
         }
 
     }
