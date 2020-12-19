@@ -73,12 +73,15 @@ class GuideRecipeActivity : AppCompatActivity() {
                         val intent = Intent(this, FinalStep::class.java)
                         startActivity(intent)
                     }
+
                     updateStepUI(1)
                     previousStepButton?.visibility = View.VISIBLE
+
 
                 }
 
                 previousStepButton?.setOnClickListener {
+                    nextstepbutton?.text = "Next Step"
                     if(nextstepbutton?.visibility == View.INVISIBLE){
                         nextstepbutton?.visibility = View.VISIBLE
                     }
@@ -184,7 +187,8 @@ class GuideRecipeActivity : AppCompatActivity() {
             numberstep.text = "Step $number"
             explanation.text = explimination.toString()
 
-
-
     }
+
+
+
 }
