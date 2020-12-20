@@ -157,12 +157,6 @@ class GuideRecipeActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     public fun updateStepUI(x: Int) {
-
-        println("Amount of steps: " + stepsJA?.length())
-        println("Current i: $i")
-//            if(stepsJA?.length()!!-1 == i+x){
-//                nextstepbutton?.text = "Finish"
-//            }
         i += x
         while (i == (stepsJA?.length()!! - 1)) {
             i-=x
