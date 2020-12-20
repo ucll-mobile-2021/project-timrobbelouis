@@ -158,37 +158,37 @@ class GuideRecipeActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     public fun updateStepUI(x: Int) {
 
-            println(stepsJA?.length())
-            println(i)
-            if(stepsJA?.length()!!-1 == i+x){
-//                nextstepbutton?.visibility = View.INVISIBLE
-                nextstepbutton?.text = "Finish"
-            }
-            i += x
-            val step = stepsJA?.get(i)
-            val stepJ = JSONObject(step.toString())
-            val number = stepJ["number"]
-            val explimination = stepJ["step"]
-            val ingredients = stepJ["ingredients"]
+        println("Amount of steps: " + stepsJA?.length())
+        println("Current i: $i")
+//            if(stepsJA?.length()!!-1 == i+x){
+//                nextstepbutton?.text = "Finish"
+//            }
+        i += x
+        while (i == (stepsJA?.length()!! - 1)) {
+            i-=x
+        }
+        val step = stepsJA?.get(i)
+        val stepJ = JSONObject(step.toString())
+        val number = stepJ["number"]
+        val explimination = stepJ["step"]
+        val ingredients = stepJ["ingredients"]
 
-            val numberstep = findViewById<TextView>(R.id.number)
-            val ingredientslist = findViewById<ListView>(R.id.ingred_list)
-            val explanation = findViewById<TextView>(R.id.explanation)
+        val numberstep = findViewById<TextView>(R.id.number)
+        val ingredientslist = findViewById<ListView>(R.id.ingred_list)
+        val explanation = findViewById<TextView>(R.id.explanation)
 
-            val ingredientsJA = JSONArray(ingredients.toString())
-                val array = Array(ingredientsJA.length()) {
-                    //name uit JSON string halen
-                    i ->
-                    JSONObject(ingredientsJA.get(i).toString()).get("name")
-                }
-            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, array)
+        val ingredientsJA = JSONArray(ingredients.toString())
+        val array = Array(ingredientsJA.length()) {
+            //name uit JSON string halen
+            i ->
+            JSONObject(ingredientsJA.get(i).toString()).get("name")
+        }
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, array)
 
-            ingredientslist.adapter = adapter
-            numberstep.text = "Step $number"
-            explanation.text = explimination.toString()
+        ingredientslist.adapter = adapter
+        numberstep.text = "Step $number"
+        explanation.text = explimination.toString()
 
     }
-
-
 
 }
