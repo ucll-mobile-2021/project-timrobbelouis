@@ -18,29 +18,32 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/ChefTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/annie_use_your_telescope"
                 android:text="Chef Louiardee"
-                android:textSize="36sp"
+                android:textSize="42sp"
                 app:layout_constraintBottom_toTopOf="@+id/divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.186"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintVertical_chainStyle="packed"
+                app:fontFamily="@font/annie_use_your_telescope"
+                />
 
             <View
                 android:id="@+id/divider"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <TextView
                 android:id="@+id/getRandomRecipe"
@@ -58,9 +61,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="@string/editors_choice"
+                android:text="@string/dishes_of_the_week"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/favoriteRecipiesButton" />
 
@@ -189,7 +193,7 @@
                 android:layout_marginTop="40dp"
                 android:hint="Search Recipe"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/ChefTitle" />
 
             <AutoCompleteTextView
                 android:id="@+id/searchByIngredientsInput"
@@ -197,6 +201,7 @@
                 android:layout_height="49dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="24dp"
+                android:fontFamily="@font/poppins"
                 android:hint="Search By Ingredients"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/searchRecipeInput" />
@@ -209,7 +214,7 @@
                 android:layout_marginTop="40dp"
                 android:background="@android:drawable/ic_menu_search"
                 app:layout_constraintStart_toEndOf="@+id/searchRecipeInput"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/ChefTitle" />
 
             <ImageButton
                 android:id="@+id/searchByIngredients"
