@@ -10,8 +10,8 @@
         android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="86dp">
+        tools:layout_editor_absoluteX="-118dp"
+        tools:layout_editor_absoluteY="316dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout"
@@ -32,8 +32,8 @@
 
             <ImageView
                 android:id="@+id/recipeInfoImage"
-                android:layout_width="128dp"
-                android:layout_height="129dp"
+                android:layout_width="141dp"
+                android:layout_height="141dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
@@ -45,10 +45,13 @@
                 android:id="@+id/GuideButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:hint="Search Recipe"
                 android:text="Guide"
                 android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.825"
                 app:layout_constraintStart_toEndOf="@+id/recipeInfoImage"
                 app:layout_constraintTop_toBottomOf="@+id/favorite_empty" />
 
@@ -57,14 +60,16 @@
                 style="@android:style/Widget.DeviceDefault.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="48dp"
                 android:isIndicator="true"
                 android:max="5"
                 android:numStars="5"
                 android:progressTint="#FFC107"
                 android:scaleX="2"
                 android:scaleY="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.798"
                 app:layout_constraintStart_toEndOf="@+id/recipeInfoImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -133,9 +138,8 @@
                 android:id="@+id/imageView11"
                 android:layout_width="35dp"
                 android:layout_height="29dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="48dp"
-                app:layout_constraintStart_toEndOf="@+id/favorite_empty"
+                android:layout_marginTop="60dp"
+                app:layout_constraintEnd_toStartOf="@+id/time"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/clock" />
 
@@ -143,21 +147,21 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="52dp"
-                android:layout_marginEnd="76dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="48dp"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imageView11"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/favorite_empty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginStart="108dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="32dp"
                 android:background="@drawable/heart_white"
+                app:layout_constraintEnd_toStartOf="@+id/imageView11"
                 app:layout_constraintStart_toEndOf="@+id/recipeInfoImage"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/heart_white" />
