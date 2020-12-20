@@ -54,7 +54,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/getRandomRecipe" />
+                app:layout_constraintTop_toBottomOf="@+id/favoriteRecipiesButton" />
 
             <View
                 android:id="@+id/divider2"
@@ -163,43 +163,51 @@
 
             <Button
                 android:id="@+id/getRandomRecipe"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginEnd="20dp"
                 android:text="Random recipe"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/searchByIngredientsInput" />
 
 
             <Button
                 android:id="@+id/favoriteRecipiesButton"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="20dp"
                 android:text="Favorite Recipes"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchByIngredientsInput" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/getRandomRecipe" />
 
             <AutoCompleteTextView
                 android:id="@+id/searchRecipeInput"
-                android:layout_width="208dp"
+                android:layout_width="0dp"
                 android:layout_height="49dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="40dp"
+                android:layout_marginEnd="4dp"
                 android:hint="Search Recipe"
+                app:layout_constraintEnd_toStartOf="@+id/searchRecipe"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ChefTitle" />
 
             <AutoCompleteTextView
                 android:id="@+id/searchByIngredientsInput"
-                android:layout_width="208dp"
+                android:layout_width="0dp"
                 android:layout_height="49dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginEnd="4dp"
                 android:fontFamily="@font/poppins"
                 android:hint="Search By Ingredients"
+                app:layout_constraintEnd_toStartOf="@+id/searchByIngredients"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/searchRecipeInput" />
 
@@ -207,20 +215,20 @@
                 android:id="@+id/searchRecipe"
                 android:layout_width="47dp"
                 android:layout_height="46dp"
-                android:layout_marginStart="4dp"
                 android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
                 android:background="@android:drawable/ic_menu_search"
-                app:layout_constraintStart_toEndOf="@+id/searchRecipeInput"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ChefTitle" />
 
             <ImageButton
                 android:id="@+id/searchByIngredients"
                 android:layout_width="47dp"
                 android:layout_height="46dp"
-                android:layout_marginStart="4dp"
                 android:layout_marginTop="28dp"
+                android:layout_marginEnd="20dp"
                 android:background="@android:drawable/ic_menu_search"
-                app:layout_constraintStart_toEndOf="@+id/searchByIngredientsInput"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/searchRecipe" />
 
             <ImageView
