@@ -8,8 +8,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="-51dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-104dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout"
@@ -60,7 +60,6 @@
                 android:id="@+id/divider2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -81,39 +80,41 @@
                 android:id="@+id/EditorsChoiceImage2"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
                 android:contentDescription="Image"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider5"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/EditorsChoiceTitle1"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="36dp"
                 android:text="TextView"
                 android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/EditorsChoiceImage1" />
+                app:layout_constraintBottom_toTopOf="@+id/divider5"
+                app:layout_constraintStart_toEndOf="@+id/EditorsChoiceImage1"
+                app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
             <TextView
                 android:id="@+id/EditorsChoiceTitle2"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="36dp"
                 android:text="Textview"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/EditorsChoiceImage2" />
+                app:layout_constraintBottom_toTopOf="@+id/divider3"
+                app:layout_constraintStart_toEndOf="@+id/EditorsChoiceImage2"
+                app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
             <ImageView
                 android:id="@+id/EditorsChoiceImage3"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider3"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -122,41 +123,64 @@
                 android:id="@+id/EditorsChoiceTitle4"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="36dp"
                 android:text="TextView"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/EditorsChoiceImage4" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/EditorsChoiceImage4"
+                app:layout_constraintTop_toBottomOf="@+id/divider6" />
 
             <TextView
                 android:id="@+id/EditorsChoiceTitle3"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="36dp"
                 android:text="TextView"
                 android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/EditorsChoiceImage3" />
+                app:layout_constraintBottom_toTopOf="@+id/divider6"
+                app:layout_constraintStart_toEndOf="@+id/EditorsChoiceImage3"
+                app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
             <ImageView
                 android:id="@+id/EditorsChoiceImage4"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider3"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider6"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <View
                 android:id="@+id/divider3"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/EditorsChoiceTitle2" />
+                app:layout_constraintTop_toBottomOf="@+id/EditorsChoiceImage2" />
+
+            <Button
+                android:id="@+id/getRandomRecipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:text="Random recipe"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchByIngredientsInput" />
+
+
+            <Button
+                android:id="@+id/favoriteRecipiesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="20dp"
+                android:text="Favorite Recipes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchByIngredientsInput" />
 
             <AutoCompleteTextView
                 android:id="@+id/searchRecipeInput"
@@ -209,25 +233,25 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@mipmap/ic_launcher" />
 
-            <Button
-                android:id="@+id/getRandomRecipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
                 android:layout_marginTop="8dp"
-                android:text="Get a random recipe"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/favoriteRecipiesButton" />
+                app:layout_constraintTop_toBottomOf="@+id/EditorsChoiceImage1" />
 
-            <Button
-                android:id="@+id/favoriteRecipiesButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="4dp"
-                android:text="Favorite Recipes"
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchByIngredientsInput" />
+                app:layout_constraintTop_toBottomOf="@+id/EditorsChoiceImage3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
