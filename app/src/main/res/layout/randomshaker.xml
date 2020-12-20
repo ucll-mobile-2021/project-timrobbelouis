@@ -24,4 +24,10 @@
         android:text="Shake the phone to get a random recipe"
         android:textSize="24sp"
         android:textStyle="bold" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/shakeit"
+        />
 </LinearLayout>
