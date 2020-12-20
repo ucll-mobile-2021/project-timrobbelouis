@@ -8,8 +8,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-41dp"
-        tools:layout_editor_absoluteY="-16dp">
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-51dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout"
@@ -26,14 +26,13 @@
                 android:fontFamily="@font/annie_use_your_telescope"
                 android:text="Chef Louiardee"
                 android:textSize="42sp"
+                app:fontFamily="@font/annie_use_your_telescope"
                 app:layout_constraintBottom_toTopOf="@+id/divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.186"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed"
-                app:fontFamily="@font/annie_use_your_telescope"
-                />
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <View
                 android:id="@+id/divider"
@@ -46,27 +45,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <TextView
-                android:id="@+id/getRandomRecipe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/get_random_recipe"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchByIngredientsInput" />
-
-            <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/dishes_of_the_week"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/favoriteRecipiesButton" />
+                app:layout_constraintTop_toBottomOf="@+id/getRandomRecipe" />
 
             <View
                 android:id="@+id/divider2"
@@ -105,7 +93,6 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
                 android:text="TextView"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +102,6 @@
                 android:id="@+id/EditorsChoiceTitle2"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
                 android:text="Textview"
                 android:textSize="24sp"
@@ -136,7 +122,6 @@
                 android:id="@+id/EditorsChoiceTitle4"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
                 android:text="TextView"
                 android:textSize="24sp"
@@ -148,7 +133,6 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="16dp"
                 android:text="TextView"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -173,17 +157,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/EditorsChoiceTitle2" />
-
-            <TextView
-                android:id="@+id/favoriteRecipiesButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:text="Favorite Recipes"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/getRandomRecipe" />
 
             <AutoCompleteTextView
                 android:id="@+id/searchRecipeInput"
@@ -235,6 +208,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@mipmap/ic_launcher" />
+
+            <Button
+                android:id="@+id/getRandomRecipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="Get a random recipe"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/favoriteRecipiesButton" />
+
+            <Button
+                android:id="@+id/favoriteRecipiesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
+                android:text="Favorite Recipes"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchByIngredientsInput" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
