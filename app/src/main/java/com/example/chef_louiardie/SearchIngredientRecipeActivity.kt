@@ -30,7 +30,7 @@ class SearchIngredientRecipeActivity: AppCompatActivity()  {
         val previnput = intent.getStringExtra("input")
         input.setText(previnput)
         search(input.text.toString())
-        Thread.sleep(250)
+        Thread.sleep(350)
         doit(of)
 
 
@@ -38,7 +38,7 @@ class SearchIngredientRecipeActivity: AppCompatActivity()  {
         val searchButton = findViewById<Button>(R.id.search_spec_recipe)
         searchButton.setOnClickListener {
             search(input.text.toString())
-            Thread.sleep(250)
+            Thread.sleep(350)
             doit(of)
         }
 
