@@ -24,10 +24,12 @@ class MainActivity : AppCompatActivity() {
         System.setProperties(properties)
         val apikey = System.getProperties().getProperty("apikey")
         // search by ingredient
-        val searchIngredientRecipe = findViewById<TextView>(R.id.searchByIngredients)
+        val searchIngredientRecipe = findViewById<ImageButton>(R.id.searchByIngredients)
 
         searchIngredientRecipe.setOnClickListener {
-            val intent = Intent(this, SearchIngredientRecipeActivity::class.java)
+            val intent = Intent(this, SearchIngredientRecipeActivity::class.java).apply {
+                putExtra("input",findViewById<AutoCompleteTextView>(R.id.searchByIngredientsInput).text.toString())
+            }
             startActivity(intent)
         }
         // search recipe
