@@ -127,7 +127,6 @@ class GuideRecipeActivity : AppCompatActivity() {
         }
 
     }
-
     private fun bindViews() {
         minute = findViewById(R.id.minute)
         seconds = findViewById(R.id.seconds)
