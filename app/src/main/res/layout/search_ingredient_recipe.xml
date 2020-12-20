@@ -31,14 +31,36 @@
 
     <ListView
         android:id="@+id/spec_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider = "#000"
-        android:dividerHeight = "1dp"
-        android:footerDividersEnabled = "false"
-        android:headerDividersEnabled = "false"
+        android:layout_width="411dp"
+        android:layout_height="488dp"
         android:layout_marginTop="100dp"
+        android:divider="#000"
+        android:dividerHeight="1dp"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="126dp" />
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/PreviousPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="40dp"
+        android:text="Previous Page"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spec_list" />
+
+    <Button
+        android:id="@+id/NextPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="36dp"
+        android:text="Next Page"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spec_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
