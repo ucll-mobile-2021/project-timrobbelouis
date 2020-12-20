@@ -15,7 +15,9 @@ class FavoritesActivity : AppCompatActivity() {
         val apikey = System.getProperties().getProperty("apikey")
         super.onCreate(savedInstanceState)
         val actionbar = supportActionBar
-        actionbar?.hide()
+        actionbar!!.title = ""
+        //set back button
+        actionbar.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.favorites_page)
         doit()
         val deletbutton = findViewById<FloatingActionButton>(R.id.delet_all)
@@ -63,5 +65,9 @@ class FavoritesActivity : AppCompatActivity() {
             }
         }
 
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
