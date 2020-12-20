@@ -2,6 +2,7 @@ package com.example.chef_louiardie
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONArray
@@ -11,70 +12,102 @@ import java.net.URL
 
 class SearchRecipeActivity: AppCompatActivity()  {
     val apikey =  System.getProperties().getProperty("apikey")
+
+    var array= emptyArray<String>()
+    var resultJSON = JSONArray()
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        var of = 0
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_recipe)
-        val input = findViewById<EditText>(R.id.input_search)
-
         val actionbar = supportActionBar
         //set actionbar title
         actionbar!!.title = "Search Recipe"
         //set back button
         actionbar.setDisplayHomeAsUpEnabled(true)
-        val input2 = intent.getStringExtra("input")
-        input.setText(input2)
-        if (input2 != null) {
-            doit(input2)
-        }
+
+        val input = findViewById<EditText>(R.id.input_search)
+        val previnput = intent.getStringExtra("input")
+        input.setText(previnput)
+        search(input.text.toString())
+        Thread.sleep(250)
+        doit(of)
+
+
 
         val searchButton = findViewById<Button>(R.id.search_spec_recipe)
         searchButton.setOnClickListener {
-
-            //request met input van de user
-           doit(input.text.toString())
-
+           search(input.text.toString())
+            Thread.sleep(250)
+           doit(of)
         }
 
+        val next = findViewById<Button>(R.id.NextPage)
+        val prev = findViewById<Button>(R.id.PreviousPage)
+        next.setOnClickListener{
+            next.visibility = View.INVISIBLE
+            prev.visibility = View.VISIBLE
+            of += 10
+            doit(of)
+        }
+
+        prev.setOnClickListener{
+            prev.visibility = View.INVISIBLE
+            next.visibility = View.VISIBLE
+            of -= 10
+            doit(of)
+        }
     }
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
 
-    fun doit(input : String){
-        Thread {
+    //request met input van de user
+    private fun doit(offset : Int){
+        println("in od it " + array.size)
+        var arrayTemp= emptyArray<String>()
+        if(array.size >= 10 + offset) {
+            arrayTemp = array.sliceArray(0 + offset..9 + offset)
+        }
 
-            val result = URL("https://api.spoonacular.com/recipes/autocomplete?apiKey="+ apikey +"&number=10&query=${input}").readText()
-            val resultJSON = JSONArray(result)
-            val array = Array(resultJSON.length()){
-                //titel uit JSON string halen
-                    i -> JSONObject(resultJSON.get(i).toString()).get("title")
+        val list = findViewById<ListView>(R.id.spec_list)
+        if(!arrayTemp.isEmpty()) {
+            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayTemp)
+            list.adapter = adapter
+        }else{
+            val arrayEmpti = Array(1){ i -> "No Results Were Found"
             }
-            //val url = JSONObject(result).getString("image")
-            //Picasso.get().load(url).into(recipeInfoImage)
-            //update listview with found results
-            runOnUiThread {
-                //Update UI
-                val list = findViewById<ListView>(R.id.spec_list)
+            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayEmpti)
+            list.adapter = adapter
+        }
+        list.setOnItemClickListener { parent, view, position, id ->
+            val recipeId = JSONObject(resultJSON.get(position).toString()).get("id").toString()
+            val intent = Intent(this, RecipeInformationActivity::class.java).apply {
+                putExtra("id", recipeId)
+            }
+            startActivity(intent)
+        }
 
-                if(!array.isEmpty()) {
-                    val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, array)
-                    list.adapter = adapter
-                }else{
-                    val arrayEmpti = Array(1){ i -> "No Results Were Found"
-                    }
-                    val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayEmpti)
-                    list.adapter = adapter
+
+    }
+
+    private fun search(input : String){
+        if(!input.isEmpty()) {
+            Thread {
+                val result =
+                    URL("https://api.spoonacular.com/recipes/autocomplete?number=25&apiKey=" + apikey + "&query=" + input).readText()
+
+                resultJSON = JSONArray(result)
+                println(result.toString())
+                array = Array(resultJSON.length()) {
+                    //titel uit JSON string halen
+                        i ->
+                    JSONObject(resultJSON.get(i).toString()).get("title").toString()
                 }
-                list.setOnItemClickListener { parent, view, position, id ->
-                    val recipeId = JSONObject(resultJSON.get(position).toString()).get("id").toString()
-                    val intent = Intent(this, RecipeInformationActivity::class.java).apply {
-                        putExtra("id", recipeId)
-                    }
-                    startActivity(intent)
-                }
-            }
-        }.start()
+                println("in thread " + array.size)
+            }.start()
+        }
     }
 
 

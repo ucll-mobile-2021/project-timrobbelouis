@@ -41,13 +41,11 @@ class FavoritesActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-        println("onresmi")
         doit()
         super.onResume()
     }
 
     fun doit(){
-        println("dote")
         val listView = findViewById<ListView>(R.id.favoritesListView)
         listView.adapter = null
 

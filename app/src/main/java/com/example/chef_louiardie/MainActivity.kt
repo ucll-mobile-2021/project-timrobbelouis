@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         val actionbar = supportActionBar
         actionbar?.hide()
         val properties = Properties()
-        properties.put("apikey", "eff6332366ac4eb79138ef456683a0e8")
+        properties.put("apikey", "897a8a319dd644d2b79fd934f3f8ab77")
         System.setProperties(properties)
         val apikey = System.getProperties().getProperty("apikey")
         // search by ingredient
