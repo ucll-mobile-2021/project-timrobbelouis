@@ -20,7 +20,18 @@ class FinalStep : AppCompatActivity() {
 
         val viewKonfetti = findViewById<KonfettiView>(R.id.viewKonfetti)
 
+        findViewById<Button>(R.id.Home).setOnClickListener(){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
+        findViewById<Button>(R.id.Share).setOnClickListener(){
+            val intent= Intent()
+            intent.action=Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,"I Just Made A Recipe Using The Chef Louiardee App!!")
+            intent.type="text/plain"
+            startActivity(Intent.createChooser(intent,"Share To:"))
+        }
 
         viewKonfetti.build()
             .addColors(Color.RED, Color.GREEN, Color.LTGRAY)
