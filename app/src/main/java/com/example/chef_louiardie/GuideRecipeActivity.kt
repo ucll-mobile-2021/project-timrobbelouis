@@ -68,16 +68,15 @@ class GuideRecipeActivity : AppCompatActivity() {
                 nextstepbutton = findViewById<Button>(R.id.nextstep)
                 updateStepUI(1)
                 nextstepbutton?.setOnClickListener {
-                    if(stepsJA?.length()!!-1 == i+1){
-                        nextstepbutton?.text = "Finish"
+                    if(stepsJA?.length()!! == i+1){
                         val intent = Intent(this, FinalStep::class.java)
                         startActivity(intent)
                     }
-
-                    updateStepUI(1)
-                    previousStepButton?.visibility = View.VISIBLE
-
-
+                    if(stepsJA?.length()!!-1 == i+1){
+                        nextstepbutton?.text = "Finish"
+                    }
+                        updateStepUI(1)
+                        previousStepButton?.visibility = View.VISIBLE
                 }
 
                 previousStepButton?.setOnClickListener {
@@ -158,7 +157,8 @@ class GuideRecipeActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     public fun updateStepUI(x: Int) {
         i += x
-        while (i == (stepsJA?.length()!! - 1)) {
+        println(i)
+        while (i == (stepsJA?.length()!!)) {
             i-=x
         }
         val step = stepsJA?.get(i)

@@ -14,11 +14,12 @@ class FinalStep : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.finish_step)
-
         val actionbar = supportActionBar
-        actionbar?.hide()
-
+        actionbar!!.title = ""
+        //set back button
+        actionbar.setDisplayHomeAsUpEnabled(true)
         val viewKonfetti = findViewById<KonfettiView>(R.id.viewKonfetti)
+
 
         findViewById<Button>(R.id.Home).setOnClickListener(){
             val intent = Intent(this, MainActivity::class.java)
@@ -43,6 +44,10 @@ class FinalStep : AppCompatActivity() {
             .addSizes(Size(12))
             .setPosition(0f, viewKonfetti.width + 1200f, +50f, -50f)
             .streamFor(300, 3000L)
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
 
