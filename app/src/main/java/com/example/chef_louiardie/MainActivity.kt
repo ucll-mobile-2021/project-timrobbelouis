@@ -23,29 +23,42 @@ class MainActivity : AppCompatActivity() {
         val actionbar = supportActionBar
         actionbar?.hide()
         val properties = Properties()
-        properties.put("apikey", "f57ead542f804aa4bb76336783b870e0")
+        properties.put("apikey", "ff1677424b5046f2919e47837ea819e0")
         System.setProperties(properties)
         val apikey = System.getProperties().getProperty("apikey")
         // search by ingredient
         val searchIngredientRecipe = findViewById<ImageButton>(R.id.searchByIngredients)
         val searchIngredientsRecipeInput = findViewById<AutoCompleteTextView>(R.id.searchByIngredientsInput)
-
         searchIngredientRecipe.setOnClickListener {
             val intent = Intent(this, SearchIngredientRecipeActivity::class.java).apply {
                 putExtra("input", searchIngredientsRecipeInput.text.toString())
             }
             startActivity(intent)
         }
+        searchIngredientsRecipeInput.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE) {
+                //do what you want on the press of 'done'
+                searchIngredientRecipe.callOnClick()
+            }
+            false
+        })
         // search recipe
         val searchRecipe = findViewById<ImageButton>(R.id.searchRecipe)
+        val searchRecipeInput = findViewById<AutoCompleteTextView>(R.id.searchRecipeInput)
 
         searchRecipe.setOnClickListener {
             val intent = Intent(this, SearchRecipeActivity::class.java).apply {
-                putExtra("input", findViewById<AutoCompleteTextView>(R.id.searchRecipeInput).text.toString())
+                putExtra("input", searchRecipeInput.text.toString())
             }
             startActivity(intent)
         }
-
+        searchRecipeInput.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE) {
+                //do what you want on the press of 'done'
+                searchRecipe.callOnClick()
+            }
+            false
+        })
         // search by random
         val searchRandomRecipe = findViewById<TextView>(R.id.getRandomRecipe)
 

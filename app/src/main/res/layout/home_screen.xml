@@ -194,6 +194,8 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="4dp"
                 android:hint="Search Recipe"
+                android:maxLength="50"
+                android:singleLine="true"
                 app:layout_constraintEnd_toStartOf="@+id/searchRecipe"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ChefTitle" />
@@ -207,6 +209,8 @@
                 android:layout_marginEnd="4dp"
                 android:fontFamily="@font/poppins"
                 android:hint="Search By Ingredients"
+                android:maxLength="100"
+                android:singleLine="true"
                 app:layout_constraintEnd_toStartOf="@+id/searchByIngredients"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/searchRecipeInput" />
