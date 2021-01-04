@@ -46,7 +46,7 @@ class ShakerActivity : AppCompatActivity() {
         shakebutton.setOnClickListener {
             goToRandomActivity()
         }
-        
+
 
         }
         fun goToRandomActivity() {

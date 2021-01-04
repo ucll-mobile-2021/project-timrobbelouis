@@ -40,7 +40,7 @@ class RecipeInformationActivity : AppCompatActivity() {
                 if (id != null) {
                     println(db.contains(id))
                     if(db.contains(id)){
-                        findViewById<ImageButton>(R.id.favorite_empty).setBackgroundResource(R.drawable.heart_black)
+                        findViewById<ImageButton>(R.id.favorite_empty).setBackgroundResource(R.drawable.red_heart_filled)
                     }
                 }
         val favorite = findViewById<ImageButton>(R.id.favorite_empty)
@@ -48,11 +48,11 @@ class RecipeInformationActivity : AppCompatActivity() {
         if (id != null) {
             if (db.contains(id)) {
                 db.deleteRecipe(id)
-                favorite.setBackgroundResource(R.drawable.heart_white)
+                favorite.setBackgroundResource(R.drawable.red_heart_line)
             }
             else {
                 db.insertData(id)
-                favorite.setBackgroundResource(R.drawable.heart_black)
+                favorite.setBackgroundResource(R.drawable.red_heart_filled)
             }
         }
 

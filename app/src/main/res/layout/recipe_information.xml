@@ -160,11 +160,11 @@
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="56dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/heart_white"
+                android:background="@drawable/red_heart_line"
                 app:layout_constraintEnd_toStartOf="@+id/imageView11"
                 app:layout_constraintStart_toEndOf="@+id/recipeInfoImage"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/heart_white" />
+                app:srcCompat="@drawable/red_heart_line" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
