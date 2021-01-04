@@ -9,6 +9,9 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.Vibrator
+import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONObject
@@ -38,6 +41,12 @@ class ShakerActivity : AppCompatActivity() {
             actionbar!!.title = "Recipe Information"
             //set back button
             actionbar.setDisplayHomeAsUpEnabled(true)
+        val shakebutton = findViewById<Button>(R.id.shakebutton)
+
+        shakebutton.setOnClickListener {
+            goToRandomActivity()
+        }
+        
 
         }
         fun goToRandomActivity() {
