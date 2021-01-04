@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         searchRecipeInput.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
-            if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE) {
+            if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_NEXT) {
                 //do what you want on the press of 'done'
                 searchRecipe.callOnClick()
             }
