@@ -14,6 +14,7 @@
         android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="Recipe"
+        android:singleLine="true"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/search_spec_recipe"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,8 +39,9 @@
         android:dividerHeight="1dp"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/PreviousPage"

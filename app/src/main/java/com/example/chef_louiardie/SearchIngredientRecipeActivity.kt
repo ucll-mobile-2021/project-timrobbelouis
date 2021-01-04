@@ -2,7 +2,9 @@ package com.example.chef_louiardie
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONArray
@@ -40,6 +42,13 @@ class SearchIngredientRecipeActivity: AppCompatActivity()  {
 
         }
         searchButton.callOnClick()
+        input.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_NEXT) {
+                //do what you want on the press of 'done'
+                searchButton.callOnClick()
+            }
+            false
+        })
 
         val next = findViewById<Button>(R.id.NextPage)
         val prev = findViewById<Button>(R.id.PreviousPage)
