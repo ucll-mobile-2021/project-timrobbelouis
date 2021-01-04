@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val actionbar = supportActionBar
         actionbar?.hide()
         val properties = Properties()
-        properties.put("apikey", "bde1396a9a2e46489f02fcd9bea1c8b4")
+        properties.put("apikey", "f57ead542f804aa4bb76336783b870e0")
         System.setProperties(properties)
         val apikey = System.getProperties().getProperty("apikey")
         // search by ingredient
@@ -36,15 +36,6 @@ class MainActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
-        //start Robbespaghet
-        searchIngredientsRecipeInput.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
-            if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE) {
-                //do what you want on the press of 'done'
-                searchIngredientRecipe.performClick()
-            }
-            false
-        })
-        //einde Robbespaghet
         // search recipe
         val searchRecipe = findViewById<ImageButton>(R.id.searchRecipe)
 

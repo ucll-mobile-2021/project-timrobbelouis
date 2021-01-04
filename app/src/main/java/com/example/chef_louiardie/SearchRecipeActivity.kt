@@ -15,9 +15,10 @@ class SearchRecipeActivity: AppCompatActivity()  {
 
     var array= emptyArray<String>()
     var resultJSON = JSONArray()
+    var of = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        var of = 0
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_recipe)
         val actionbar = supportActionBar
@@ -30,16 +31,13 @@ class SearchRecipeActivity: AppCompatActivity()  {
         val previnput = intent.getStringExtra("input")
         input.setText(previnput)
         search(input.text.toString())
-        Thread.sleep(250)
-        doit(of)
+
 
 
 
         val searchButton = findViewById<Button>(R.id.search_spec_recipe)
         searchButton.setOnClickListener {
            search(input.text.toString())
-            Thread.sleep(250)
-           doit(of)
         }
 
         val next = findViewById<Button>(R.id.NextPage)
@@ -94,7 +92,7 @@ class SearchRecipeActivity: AppCompatActivity()  {
 
     private fun search(input : String){
         if(!input.isEmpty()) {
-            Thread {
+            val t = Thread {
                 val result =
                     URL("https://api.spoonacular.com/recipes/autocomplete?number=25&apiKey=" + apikey + "&query=" + input).readText()
 
@@ -106,7 +104,10 @@ class SearchRecipeActivity: AppCompatActivity()  {
                     JSONObject(resultJSON.get(i).toString()).get("title").toString()
                 }
                 println("in thread " + array.size)
-            }.start()
+            }
+            t.start()
+            t.join()
+            doit(of)
         }
     }
 

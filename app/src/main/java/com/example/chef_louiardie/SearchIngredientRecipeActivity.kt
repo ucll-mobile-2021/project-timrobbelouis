@@ -15,9 +15,10 @@ class SearchIngredientRecipeActivity: AppCompatActivity()  {
 
     var array= emptyArray<String>()
     var resultJSON = JSONArray()
+    var of = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        var of = 0
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_recipe)
         val actionbar = supportActionBar
@@ -29,18 +30,16 @@ class SearchIngredientRecipeActivity: AppCompatActivity()  {
         val input = findViewById<EditText>(R.id.input_search)
         val previnput = intent.getStringExtra("input")
         input.setText(previnput)
-        search(input.text.toString())
-        Thread.sleep(350)
-        doit(of)
+
 
 
 
         val searchButton = findViewById<Button>(R.id.search_spec_recipe)
         searchButton.setOnClickListener {
             search(input.text.toString())
-            Thread.sleep(350)
-            doit(of)
+
         }
+        searchButton.callOnClick()
 
         val next = findViewById<Button>(R.id.NextPage)
         val prev = findViewById<Button>(R.id.PreviousPage)
@@ -94,7 +93,7 @@ class SearchIngredientRecipeActivity: AppCompatActivity()  {
 
     private fun search(input : String){
         if(!input.isEmpty()) {
-            Thread {
+            val t = Thread {
                 val result = URL("https://api.spoonacular.com/recipes/findByIngredients?apiKey="+ apikey +"&number=20&ingredients=${input}").readText()
 
 
@@ -106,7 +105,12 @@ class SearchIngredientRecipeActivity: AppCompatActivity()  {
                     JSONObject(resultJSON.get(i).toString()).get("title").toString()
                 }
                 println("in thread " + array.size)
-            }.start()
+
+            }
+            t.start()
+            t.join()
+
+            doit(of)
         }
     }
 
