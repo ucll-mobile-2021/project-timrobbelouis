@@ -2,10 +2,13 @@ package com.example.chef_louiardie
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import android.widget.AutoCompleteTextView
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.TextView.OnEditorActionListener
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
@@ -25,19 +28,29 @@ class MainActivity : AppCompatActivity() {
         val apikey = System.getProperties().getProperty("apikey")
         // search by ingredient
         val searchIngredientRecipe = findViewById<ImageButton>(R.id.searchByIngredients)
+        val searchIngredientsRecipeInput = findViewById<AutoCompleteTextView>(R.id.searchByIngredientsInput)
 
         searchIngredientRecipe.setOnClickListener {
             val intent = Intent(this, SearchIngredientRecipeActivity::class.java).apply {
-                putExtra("input",findViewById<AutoCompleteTextView>(R.id.searchByIngredientsInput).text.toString())
+                putExtra("input", searchIngredientsRecipeInput.text.toString())
             }
             startActivity(intent)
         }
+        //start Robbespaghet
+        searchIngredientsRecipeInput.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            if (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER || actionId == EditorInfo.IME_ACTION_DONE) {
+                //do what you want on the press of 'done'
+                searchIngredientRecipe.performClick()
+            }
+            false
+        })
+        //einde Robbespaghet
         // search recipe
         val searchRecipe = findViewById<ImageButton>(R.id.searchRecipe)
 
         searchRecipe.setOnClickListener {
             val intent = Intent(this, SearchRecipeActivity::class.java).apply {
-                putExtra("input",findViewById<AutoCompleteTextView>(R.id.searchRecipeInput).text.toString())
+                putExtra("input", findViewById<AutoCompleteTextView>(R.id.searchRecipeInput).text.toString())
             }
             startActivity(intent)
         }
