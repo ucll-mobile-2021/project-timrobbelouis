@@ -12,22 +12,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:gravity="center"
         android:padding="8dp"
-        android:text="Random Shaker"
 
+        android:text="Random Shaker"
         android:textSize="48sp"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="Shake the phone to get a random recipe"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <pl.droidsonroids.gif.GifImageView
+        android:layout_width="396dp"
+        android:layout_height="286dp"
+        android:src="@drawable/shakeit" />
+
+    <Button
+        android:id="@+id/shakebutton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/shakeit"
-        />
+        android:layout_height="wrap_content"
+        android:text="Click here if you don't want to shake" />
 </LinearLayout>
